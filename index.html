@@ -44,10 +44,11 @@
             width: 100%;
             height: 100%;
             z-index: 0;
-            opacity: 0.12;
-            background: 
-                radial-gradient(circle at 20% 30%, var(--accent-green) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, var(--accent-lime) 0%, transparent 40%);
+            opacity: 0.15;
+            background-image: url('background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             animation: pulse 8s ease-in-out infinite alternate;
         }
 
@@ -688,7 +689,7 @@
 
             <div class="action-buttons">
                 <button class="btn btn-primary" onclick="restartQuiz()">Rejouer</button>
-                <button class="btn btn-secondary" onclick="shareResults()">Partager</button>
+                <a href="https://borzeux.my.canva.site/intro-ia/impacts-cologiques" target="_blank" rel="noopener" class="btn btn-secondary" style="text-decoration: none;">Formation</a>
             </div>
         </div>
     </div>
