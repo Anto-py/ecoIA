@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ÉcoIA Challenge - L'empreinte cachée de l'IA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f1f0f;
+            --bg-medium: #1a2e1a;
+            --bg-card: #1f3a1f;
+            --accent-green: #4ade80;
+            --accent-lime: #a3e635;
+            --accent-orange: #fb923c;
+            --accent-red: #f87171;
+            --accent-blue: #60a5fa;
+            --text-light: #f0f7f0;
+            --text-muted: #a8c4a8;
+            --glow-green: 0 0 40px rgba(74, 222, 128, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        /* Animated background */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.12;
+            background: 
+                radial-gradient(circle at 20% 30%, var(--accent-green) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, var(--accent-lime) 0%, transparent 40%);
+            animation: pulse 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.08; transform: scale(1); }
+            100% { opacity: 0.15; transform: scale(1.1); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            min-height: 100vh;
+        }
+
+        /* Screens */
+        .screen {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Intro Screen */
+        .intro-screen {
+            text-align: center;
+            padding-top: 8vh;
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(2.8rem, 9vw, 4.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-lime));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            font-weight: 600;
+        }
+
+        .intro-visual {
+            width: 180px;
+            height: 180px;
+            margin: 1.5rem auto;
+            position: relative;
+        }
+
+        .leaf-icon {
+            width: 100%;
+            height: 100%;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        .intro-text {
+            max-width: 580px;
+            margin: 0 auto 2.5rem;
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+
+        .highlight {
+            color: var(--accent-lime);
+            font-weight: 700;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-lime));
+            color: var(--bg-dark);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--glow-green);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-green);
+            color: var(--bg-dark);
+        }
+
+        /* Quiz Screen */
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(74, 222, 128, 0.15);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .progress-container {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .progress-text {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: var(--bg-medium);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-lime));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .score-display {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent-lime);
+            background: var(--bg-medium);
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+        }
+
+        .question-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(74, 222, 128, 0.1);
+        }
+
+        .question-category {
+            display: inline-block;
+            font-size: 0.9rem;
+            color: var(--bg-dark);
+            background: var(--accent-green);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+        }
+
+        .question-text {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            line-height: 1.5;
+            margin-bottom: 1.8rem;
+            color: var(--text-light);
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+
+        .option {
+            padding: 1.1rem 1.4rem;
+            background: rgba(74, 222, 128, 0.05);
+            border: 2px solid rgba(74, 222, 128, 0.2);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-size: 1.05rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .option:hover:not(.disabled) {
+            background: rgba(74, 222, 128, 0.1);
+            border-color: var(--accent-green);
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            border-color: var(--accent-lime);
+            background: rgba(163, 230, 53, 0.1);
+        }
+
+        .option.correct {
+            border-color: var(--accent-green);
+            background: rgba(74, 222, 128, 0.2);
+            animation: correctPulse 0.5s ease;
+        }
+
+        .option.incorrect {
+            border-color: var(--accent-red);
+            background: rgba(248, 113, 113, 0.1);
+        }
+
+        .option.disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        @keyframes correctPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.015); }
+        }
+
+        .feedback {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 14px;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: slideIn 0.4s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback.correct {
+            background: rgba(74, 222, 128, 0.1);
+            border-left: 5px solid var(--accent-green);
+        }
+
+        .feedback.incorrect {
+            background: rgba(248, 113, 113, 0.1);
+            border-left: 5px solid var(--accent-red);
+        }
+
+        .feedback-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1.15rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .feedback.correct .feedback-title {
+            color: var(--accent-green);
+        }
+
+        .feedback.incorrect .feedback-title {
+            color: var(--accent-red);
+        }
+
+        .feedback-text {
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .feedback-text strong {
+            color: var(--accent-lime);
+        }
+
+        .feedback-source {
+            margin-top: 1rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .feedback-source a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: color 0.2s;
+        }
+
+        .feedback-source a:hover {
+            color: var(--accent-lime);
+            text-decoration: underline;
+        }
+
+        .next-btn {
+            margin-top: 1.5rem;
+            width: 100%;
+        }
+
+        /* Results Screen */
+        .results-screen {
+            text-align: center;
+            padding-top: 4vh;
+        }
+
+        .results-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .score-circle {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 1.5rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .score-circle svg {
+            position: absolute;
+            transform: rotate(-90deg);
+        }
+
+        .score-circle-bg {
+            fill: none;
+            stroke: var(--bg-medium);
+            stroke-width: 14;
+        }
+
+        .score-circle-fill {
+            fill: none;
+            stroke: url(#scoreGradient);
+            stroke-width: 14;
+            stroke-linecap: round;
+            stroke-dasharray: 502;
+            stroke-dashoffset: 502;
+            transition: stroke-dashoffset 1.5s ease-out;
+        }
+
+        .score-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+        }
+
+        .score-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat-item {
+            background: var(--bg-medium);
+            padding: 1.2rem;
+            border-radius: 14px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--accent-lime);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.3rem;
+            font-weight: 600;
+        }
+
+        .profile-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(74, 222, 128, 0.15);
+            text-align: left;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .profile-badge {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            background: var(--bg-medium);
+        }
+
+        .profile-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .profile-description {
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .tips-section {
+            background: rgba(74, 222, 128, 0.05);
+            padding: 1.3rem;
+            border-radius: 12px;
+        }
+
+        .tips-title {
+            font-weight: 700;
+            color: var(--accent-lime);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        .tips-list {
+            list-style: none;
+        }
+
+        .tips-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-muted);
+        }
+
+        .tips-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+            font-weight: 700;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .logo {
+                font-size: 2.3rem;
+            }
+
+            .question-text {
+                font-size: 1.2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .option {
+                font-size: 1rem;
+                padding: 1rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    
+    <div class="container">
+        <!-- Intro Screen -->
+        <div id="intro-screen" class="screen intro-screen active">
+            <h1 class="logo">ÉcoIA Challenge</h1>
+            <p class="subtitle">L'empreinte cachée de l'intelligence artificielle</p>
+            
+            <div class="intro-visual">
+                <svg class="leaf-icon" viewBox="0 0 100 100">
+                    <defs>
+                        <linearGradient id="leafGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#4ade80"/>
+                            <stop offset="100%" style="stop-color:#a3e635"/>
+                        </linearGradient>
+                    </defs>
+                    <path fill="url(#leafGradient)" d="M50 10 C30 10 10 30 10 50 C10 70 30 90 50 90 C50 90 50 50 50 50 C50 50 90 50 90 50 C90 30 70 10 50 10 Z" opacity="0.8"/>
+                    <path fill="none" stroke="#4ade80" stroke-width="2" d="M50 50 L50 85 M50 60 L35 50 M50 70 L65 60"/>
+                    <circle cx="70" cy="30" r="15" fill="none" stroke="#a3e635" stroke-width="2" stroke-dasharray="5,3"/>
+                    <text x="70" y="35" text-anchor="middle" fill="#a3e635" font-size="12" font-family="monospace">AI</text>
+                </svg>
+            </div>
+            
+            <p class="intro-text">
+                ChatGPT, Midjourney, Copilot... Tu utilises peut-être l'IA tous les jours. 
+                Mais sais-tu combien <span class="highlight">d'énergie</span>, <span class="highlight">d'eau</span> 
+                et de <span class="highlight">CO₂</span> sont nécessaires pour générer une seule réponse ?
+                <br><br>
+                <strong>15 questions</strong> pour tester tes connaissances sur l'impact écologique réel de l'IA !
+            </p>
+            
+            <button class="btn btn-primary" onclick="startQuiz()">
+                Relever le défi
+            </button>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quiz-screen" class="screen">
+            <div class="quiz-header">
+                <div class="progress-container">
+                    <p class="progress-text">Question <span id="current-q">1</span> sur <span id="total-q">15</span></p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill" style="width: 6.67%"></div>
+                    </div>
+                </div>
+                <div class="score-display" id="score-display">0 pts</div>
+            </div>
+
+            <div class="question-card">
+                <span class="question-category" id="question-category">Énergie</span>
+                <h2 class="question-text" id="question-text">Question loading...</h2>
+                
+                <div class="options" id="options-container">
+                    <!-- Options dynamiques -->
+                </div>
+
+                <div class="feedback" id="feedback">
+                    <p class="feedback-title" id="feedback-title">Titre</p>
+                    <p class="feedback-text" id="feedback-text">Explication...</p>
+                    <div class="feedback-source" id="feedback-source"></div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary next-btn" id="next-btn" onclick="nextQuestion()" style="display: none;">
+                Question suivante
+            </button>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen results-screen">
+            <h1 class="results-title">🎯 Tes résultats</h1>
+            
+            <div class="score-circle">
+                <svg width="180" height="180">
+                    <defs>
+                        <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#4ade80"/>
+                            <stop offset="100%" style="stop-color:#a3e635"/>
+                        </linearGradient>
+                    </defs>
+                    <circle class="score-circle-bg" cx="90" cy="90" r="80"/>
+                    <circle class="score-circle-fill" id="score-circle-fill" cx="90" cy="90" r="80"/>
+                </svg>
+                <div>
+                    <span class="score-value" id="final-score">0</span>
+                    <span class="score-label">points</span>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value" id="correct-count">0</div>
+                    <div class="stat-label">Bonnes réponses</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="accuracy">0%</div>
+                    <div class="stat-label">Précision</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="rank">-</div>
+                    <div class="stat-label">Niveau</div>
+                </div>
+            </div>
+
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="profile-badge" id="profile-badge">🌱</div>
+                    <h2 class="profile-title" id="profile-title">Ton profil</h2>
+                </div>
+                <p class="profile-description" id="profile-description">Description du profil...</p>
+                
+                <div class="tips-section">
+                    <h3 class="tips-title">💡 Pour réduire ton impact</h3>
+                    <ul class="tips-list" id="tips-list">
+                        <!-- Tips dynamiques -->
+                    </ul>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="restartQuiz()">Rejouer</button>
+                <button class="btn btn-secondary" onclick="shareResults()">Partager</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Questions avec équivalents parlants pour ados (15 questions)
+        const questions = [
+            {
+                category: "💧 Eau",
+                question: "Un data center « moyen » consomme chaque jour l'équivalent en eau de...",
+                options: [
+                    "50 baignoires",
+                    "500 machines à laver",
+                    "Plus de 6 piscines olympiques",
+                    "Une petite piscine municipale"
+                ],
+                correct: 2,
+                explanation: "Un data center moyen utilise environ <strong>6,5 piscines olympiques d'eau PAR JOUR</strong> rien que pour refroidir ses serveurs ! C'est plus de 2 300 piscines par an pour UN SEUL centre.",
+                sourceUrl: "https://www.thegreenshot.io/fr/non-classe-fr/pollution-data-center/",
+                sourceName: "The Green Shot"
+            },
+            {
+                category: "⚡ Énergie",
+                question: "Poser une question à ChatGPT consomme autant d'électricité que...",
+                options: [
+                    "Envoyer 3 emails",
+                    "Regarder 1 minute de YouTube",
+                    "Recharger ton téléphone à 10%",
+                    "Allumer une ampoule LED pendant 2 secondes"
+                ],
+                correct: 2,
+                explanation: "Une seule requête à GPT-4 consomme environ <strong>10 Wh</strong>, soit l'équivalent de recharger ton smartphone à 10%. Multiplie par toutes les questions que tu poses dans une journée...",
+                sourceUrl: "https://ekwateur.fr/blog/enjeux-environnementaux/empreinte-carbone-chat-gpt/",
+                sourceName: "Ekwateur"
+            },
+            {
+                category: "🔄 Comparaison",
+                question: "Combien de recherches Google classiques pour égaler UNE question à ChatGPT ?",
+                options: [
+                    "3 recherches Google",
+                    "10 recherches Google",
+                    "Plus de 30 recherches Google",
+                    "100 recherches Google"
+                ],
+                correct: 2,
+                explanation: "Une requête ChatGPT consomme <strong>plus de 30 fois</strong> l'énergie d'une recherche Google classique. Google cherche dans ce qui existe, l'IA génère une nouvelle réponse à chaque fois.",
+                sourceUrl: "https://ekwateur.fr/blog/enjeux-environnementaux/empreinte-carbone-chat-gpt/",
+                sourceName: "Ekwateur"
+            },
+            {
+                category: "🎨 Images IA",
+                question: "Générer UNE image HD avec Midjourney ou DALL-E consomme autant que...",
+                options: [
+                    "Prendre 50 photos avec ton téléphone",
+                    "Une recharge complète de smartphone",
+                    "10 minutes de jeu sur console",
+                    "Regarder 3 stories Instagram"
+                ],
+                correct: 1,
+                explanation: "Créer une seule image IA haute définition consomme autant d'énergie qu'une <strong>recharge complète de ton téléphone</strong>. Imagine si tu génères 10 variations pour trouver la bonne...",
+                sourceUrl: "https://drane-versailles.region-academique-idf.fr/spip.php?article1167",
+                sourceName: "DRANE Versailles"
+            },
+            {
+                category: "🌍 CO₂",
+                question: "L'entraînement de GPT-3 a émis autant de CO₂ que...",
+                options: [
+                    "Un vol Paris-New York pour 50 passagers",
+                    "5 voitures pendant toute leur durée de vie",
+                    "Le chauffage d'un appartement pendant 1 an",
+                    "Un collège entier pendant 1 mois"
+                ],
+                correct: 1,
+                explanation: "L'entraînement de GPT-3 a émis <strong>550 tonnes de CO₂</strong>, soit l'équivalent de 5 voitures thermiques conduites pendant TOUTE leur durée de vie (fabrication + utilisation).",
+                sourceUrl: "https://www.alterna-energie.fr/blog-article/quelle-est-la-consommation-energetique-des-data-centers",
+                sourceName: "Alterna Énergie"
+            },
+            {
+                category: "🖥️ Data centers",
+                question: "D'ici 2030, les data centers du monde pourraient consommer autant d'électricité que...",
+                options: [
+                    "Toutes les voitures électriques du monde",
+                    "La France entière",
+                    "13% de l'électricité mondiale (comme le Japon !)",
+                    "La ville de Paris pendant 10 ans"
+                ],
+                correct: 2,
+                explanation: "Les data centers pourraient représenter <strong>13% de l'électricité mondiale</strong> d'ici 2030. C'est l'équivalent de la consommation d'un pays comme le Japon, juste pour faire tourner nos services numériques !",
+                sourceUrl: "https://www.thegreenshot.io/fr/non-classe-fr/pollution-data-center/",
+                sourceName: "The Green Shot"
+            },
+            {
+                category: "💧 Projection eau",
+                question: "D'ici 2027, l'IA mondiale pourrait consommer assez d'eau pour remplir...",
+                options: [
+                    "100 000 piscines olympiques par an",
+                    "Le lac Léman chaque année",
+                    "Plus de 2 millions de piscines olympiques par an",
+                    "Tous les châteaux d'eau de France"
+                ],
+                correct: 2,
+                explanation: "L'IA pourrait consommer <strong>4 à 6 milliards de m³ d'eau par an</strong> d'ici 2027. C'est l'équivalent de plus de 2 millions de piscines olympiques, soit la consommation annuelle de 150 millions de personnes !",
+                sourceUrl: "https://www.jedha.co/formation-ia/impact-environnemental-ia-rapport",
+                sourceName: "Jedha"
+            },
+            {
+                category: "🔋 Entraînement vs Utilisation",
+                question: "Entre l'entraînement d'une IA (quand elle apprend) et l'inférence (quand elle répond à tes questions), qu'est-ce qui consomme le plus d'énergie au total ?",
+                options: [
+                    "L'entraînement, car c'est très long et complexe",
+                    "C'est équivalent, environ 50-50",
+                    "L'inférence, car des millions de gens posent des questions chaque jour",
+                    "Aucun des deux, c'est surtout le stockage qui consomme"
+                ],
+                correct: 2,
+                explanation: "<strong>L'inférence représente 80% de la consommation !</strong> L'entraînement (= apprendre à partir de milliards de textes) se fait une seule fois. Mais l'inférence (= générer une réponse à TA question) se répète des millions de fois par jour dans le monde. C'est donc ton utilisation quotidienne qui pèse le plus lourd !",
+                sourceUrl: "https://bonpote.com/intelligence-artificielle-le-vrai-cout-environnemental-de-la-course-a-lia/",
+                sourceName: "Bon Pote"
+            },
+            {
+                category: "📈 Émissions Google",
+                question: "Entre 2019 et 2023, les émissions de CO₂ de Google ont augmenté de...",
+                options: [
+                    "12% (légère hausse)",
+                    "25% (un quart de plus)",
+                    "Près de 50% (presque le double !)",
+                    "5% (presque stable)"
+                ],
+                correct: 2,
+                explanation: "Les émissions de Google ont bondi de <strong>48% en seulement 4 ans</strong>, principalement à cause de l'explosion de l'IA. C'est presque moitié plus de pollution en très peu de temps !",
+                sourceUrl: "https://www.entreprises.gouv.fr/decryptages-de-nos-experts/intelligence-artificielle-en-entreprise-quels-impacts-environnementaux",
+                sourceName: "Direction générale des Entreprises"
+            },
+            {
+                category: "📈 Croissance",
+                question: "La consommation des serveurs GPU (utilisés pour l'IA) augmente chaque année de...",
+                options: [
+                    "5%, comme les serveurs normaux",
+                    "Environ 10% par an",
+                    "Environ 30% par an",
+                    "Elle reste stable"
+                ],
+                correct: 2,
+                explanation: "Les serveurs GPU (ceux qui font tourner l'IA) consomment <strong>30% de plus chaque année</strong>, contre seulement 9% pour les serveurs classiques. L'explosion de l'IA accélère tout.",
+                sourceUrl: "https://www.alterna-energie.fr/blog-article/quelle-est-la-consommation-energetique-des-data-centers",
+                sourceName: "Alterna Énergie"
+            },
+            {
+                category: "🇺🇸 États-Unis",
+                question: "Chaque jour, les data centers américains consomment assez d'eau pour remplir...",
+                options: [
+                    "1 000 camions-citernes",
+                    "Une piscine olympique",
+                    "Plus de 670 piscines olympiques",
+                    "10 châteaux d'eau"
+                ],
+                correct: 2,
+                explanation: "Les data centers US consomment <strong>449 millions de gallons d'eau par jour</strong>, soit plus de 670 piscines olympiques quotidiennement ! Et les plus gros sites peuvent en utiliser 7 fois plus à eux seuls.",
+                sourceUrl: "https://www.thegreenshot.io/fr/non-classe-fr/pollution-data-center/",
+                sourceName: "The Green Shot"
+            },
+            {
+                category: "🇪🇺 Europe",
+                question: "En Europe, l'IA seule pourrait représenter quelle part de l'électricité d'ici 2030 ?",
+                options: [
+                    "Moins de 1%",
+                    "Environ 2%",
+                    "Entre 4 et 5%",
+                    "Plus de 10%"
+                ],
+                correct: 2,
+                explanation: "L'IA pourrait représenter <strong>4 à 5% de toute l'électricité européenne</strong> d'ici 2030 (contre 2-3% aujourd'hui). C'est comme si on ajoutait la consommation d'un pays entier juste pour l'IA !",
+                sourceUrl: "http://www.ifri.org/fr/notes/ia-centres-de-donnees-et-energie-quelles-tendances",
+                sourceName: "IFRI"
+            },
+            {
+                category: "💧 Microsoft",
+                question: "La consommation d'eau de Microsoft a augmenté d'un tiers en un an à cause de...",
+                options: [
+                    "La climatisation de leurs bureaux",
+                    "Le refroidissement des serveurs IA",
+                    "La fabrication de nouvelles Xbox",
+                    "Leurs campus verts"
+                ],
+                correct: 1,
+                explanation: "Microsoft a vu sa conso d'eau exploser de <strong>+33% en une seule année</strong> (2021-2022), principalement pour refroidir les serveurs qui font tourner l'IA comme Copilot et Bing Chat.",
+                sourceUrl: "https://www.jedha.co/formation-ia/impact-environnemental-ia-rapport",
+                sourceName: "Jedha"
+            },
+            {
+                category: "⚡ Projection 2026",
+                question: "D'ici 2026, les data centers mondiaux pourraient consommer autant d'électricité que...",
+                options: [
+                    "La Belgique",
+                    "L'Allemagne entière",
+                    "Le Japon entier",
+                    "Tous les trains du monde"
+                ],
+                correct: 2,
+                explanation: "Les data centers pourraient atteindre <strong>620 à 1 050 TWh en 2026</strong>, soit autant que la consommation électrique totale du Japon ! Un doublement possible en quelques années seulement.",
+                sourceUrl: "https://www.alterna-energie.fr/blog-article/quelle-est-la-consommation-energetique-des-data-centers",
+                sourceName: "Alterna Énergie (données AIE)"
+            },
+            {
+                category: "💡 Sobriété",
+                question: "Quel geste simple permet vraiment de réduire l'impact de ton usage de l'IA ?",
+                options: [
+                    "Utiliser l'IA la nuit quand il y a moins de monde",
+                    "Poser des questions plus longues",
+                    "Regrouper tes demandes et limiter les reformulations",
+                    "Utiliser l'IA sur ton téléphone plutôt que sur ordi"
+                ],
+                correct: 2,
+                explanation: "<strong>Regrouper tes demandes et éviter de reformuler 10 fois</strong> réduit vraiment ta conso. Chaque requête = énergie + eau. Réfléchis à ta question avant de l'envoyer, et choisis des modèles plus légers quand c'est suffisant !",
+                sourceUrl: "https://www.code-climat.com/impact-environnemental-ia-chatgpt-co2-energie.html",
+                sourceName: "Code Climat"
+            }
+        ];
+
+        // Profils (adaptés pour 15 questions = 150 points max)
+        const profiles = [
+            {
+                minScore: 0,
+                maxScore: 50,
+                badge: "🌱",
+                title: "Apprenti Éco-Numérique",
+                description: "Tu découvres l'impact environnemental de l'IA ! C'est un premier pas essentiel. Maintenant que tu connais ces chiffres, tu peux commencer à faire des choix plus éclairés.",
+                tips: [
+                    "Avant d'utiliser l'IA, demande-toi : « Est-ce qu'une recherche Google suffirait ? »",
+                    "Regroupe tes questions au lieu d'en poser 10 d'affilée",
+                    "Partage ces infos : la plupart des gens ignorent tout ça !"
+                ]
+            },
+            {
+                minScore: 51,
+                maxScore: 90,
+                badge: "🌿",
+                title: "Éco-Conscient du Digital",
+                description: "Tu as de bonnes bases ! Tu comprends que derrière chaque génération de texte ou d'image, il y a des serveurs, de l'eau et beaucoup d'électricité.",
+                tips: [
+                    "Utilise des modèles plus légers quand c'est suffisant",
+                    "Pour les images, cherche d'abord sur des banques classiques (Unsplash)",
+                    "Teste le moteur de recherche Ecosia, alimenté en énergie renouvelable"
+                ]
+            },
+            {
+                minScore: 91,
+                maxScore: 120,
+                badge: "🌳",
+                title: "Expert Éco-IA",
+                description: "Bravo ! Tu maîtrises bien les enjeux. Tu peux maintenant sensibiliser ton entourage à l'importance d'un usage raisonné de l'IA.",
+                tips: [
+                    "Deviens ambassadeur : explique l'impact des images IA à tes potes",
+                    "Compare les outils : certaines IA sont plus sobres que d'autres",
+                    "Suis l'actualité de l'AI Act européen et ses exigences environnementales"
+                ]
+            },
+            {
+                minScore: 121,
+                maxScore: 150,
+                badge: "🌍",
+                title: "Champion de l'IA Responsable",
+                description: "Impressionnant ! Tu es incollable. Tu as toutes les clés pour utiliser l'IA intelligemment et inspirer les autres à faire pareil.",
+                tips: [
+                    "Propose un atelier de sensibilisation dans ton école",
+                    "Explore l'outil ComparIA pour comparer l'impact des différentes IA → comparia.beta.gouv.fr",
+                    "Continue à te tenir informé : ce domaine évolue très vite"
+                ],
+                compariaLink: "https://comparia.beta.gouv.fr/"
+            }
+        ];
+
+        // État du jeu
+        let currentQuestion = 0;
+        let score = 0;
+        let correctAnswers = 0;
+        let answered = false;
+
+        // Éléments DOM
+        const screens = {
+            intro: document.getElementById('intro-screen'),
+            quiz: document.getElementById('quiz-screen'),
+            results: document.getElementById('results-screen')
+        };
+
+        function showScreen(screenName) {
+            Object.values(screens).forEach(screen => screen.classList.remove('active'));
+            screens[screenName].classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function startQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            correctAnswers = 0;
+            document.getElementById('score-display').textContent = '0 pts';
+            showScreen('quiz');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            answered = false;
+            
+            document.getElementById('current-q').textContent = currentQuestion + 1;
+            document.getElementById('total-q').textContent = questions.length;
+            document.getElementById('progress-fill').style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+            
+            document.getElementById('question-category').textContent = q.category;
+            document.getElementById('question-text').textContent = q.question;
+            
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            
+            q.options.forEach((option, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'option';
+                btn.textContent = option;
+                btn.onclick = () => selectAnswer(index);
+                optionsContainer.appendChild(btn);
+            });
+            
+            document.getElementById('feedback').classList.remove('show', 'correct', 'incorrect');
+            document.getElementById('next-btn').style.display = 'none';
+        }
+
+        function selectAnswer(index) {
+            if (answered) return;
+            answered = true;
+            
+            const q = questions[currentQuestion];
+            const options = document.querySelectorAll('.option');
+            const feedback = document.getElementById('feedback');
+            
+            options.forEach((opt, i) => {
+                opt.classList.add('disabled');
+                if (i === q.correct) {
+                    opt.classList.add('correct');
+                } else if (i === index && index !== q.correct) {
+                    opt.classList.add('incorrect');
+                }
+            });
+            
+            const isCorrect = index === q.correct;
+            
+            if (isCorrect) {
+                score += 10;
+                correctAnswers++;
+                document.getElementById('score-display').textContent = `${score} pts`;
+                feedback.classList.add('correct');
+                document.getElementById('feedback-title').textContent = '✓ Bonne réponse !';
+            } else {
+                feedback.classList.add('incorrect');
+                document.getElementById('feedback-title').textContent = '✗ Pas tout à fait...';
+            }
+            
+            document.getElementById('feedback-text').innerHTML = q.explanation;
+            document.getElementById('feedback-source').innerHTML = `<a href="${q.sourceUrl}" target="_blank" rel="noopener">📎 Source : ${q.sourceName}</a>`;
+            feedback.classList.add('show');
+            
+            const nextBtn = document.getElementById('next-btn');
+            nextBtn.style.display = 'block';
+            nextBtn.textContent = currentQuestion < questions.length - 1 ? 'Question suivante' : 'Voir mes résultats';
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            showScreen('results');
+            
+            const percentage = Math.round((correctAnswers / questions.length) * 100);
+            const profile = profiles.find(p => score >= p.minScore && score <= p.maxScore);
+            
+            // Animer le cercle
+            setTimeout(() => {
+                const circle = document.getElementById('score-circle-fill');
+                const circumference = 2 * Math.PI * 80;
+                const offset = circumference - (percentage / 100) * circumference;
+                circle.style.strokeDasharray = circumference;
+                circle.style.strokeDashoffset = offset;
+            }, 100);
+            
+            document.getElementById('final-score').textContent = score;
+            document.getElementById('correct-count').textContent = `${correctAnswers}/15`;
+            document.getElementById('accuracy').textContent = `${percentage}%`;
+            
+            let rank;
+            if (percentage >= 80) rank = "🏆 Expert";
+            else if (percentage >= 60) rank = "⭐ Avancé";
+            else if (percentage >= 40) rank = "📚 Inter.";
+            else rank = "🌱 Début.";
+            document.getElementById('rank').textContent = rank;
+            
+            document.getElementById('profile-badge').textContent = profile.badge;
+            document.getElementById('profile-title').textContent = profile.title;
+            document.getElementById('profile-description').textContent = profile.description;
+            
+            const tipsList = document.getElementById('tips-list');
+            tipsList.innerHTML = '';
+            profile.tips.forEach(tip => {
+                const li = document.createElement('li');
+                // Vérifier si le tip contient une mention de ComparIA
+                if (tip.includes('ComparIA')) {
+                    li.innerHTML = 'Explore l\'outil <a href="https://comparia.beta.gouv.fr/" target="_blank" rel="noopener" style="color: var(--accent-lime); font-weight: 700;">ComparIA</a> pour comparer l\'impact des différentes IA';
+                } else {
+                    li.textContent = tip;
+                }
+                tipsList.appendChild(li);
+            });
+        }
+
+        function restartQuiz() {
+            startQuiz();
+        }
+
+        function shareResults() {
+            const percentage = Math.round((correctAnswers / questions.length) * 100);
+            const text = `🌿 J'ai obtenu ${score}/150 (${percentage}%) au ÉcoIA Challenge !\n\nSais-tu combien d'eau et d'énergie consomme ChatGPT ? Teste-toi !`;
+            
+            if (navigator.share) {
+                navigator.share({ title: 'ÉcoIA Challenge', text: text });
+            } else {
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('Texte copié ! Partage-le sur tes réseaux 📱');
+                });
+            }
+        }
+    </script>
+</body>
+</html>
