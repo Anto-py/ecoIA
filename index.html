@@ -4,20 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ÉcoIA Challenge - L'empreinte cachée de l'IA</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* ═══════════════════════════════════════════════════════════════
+           RETROFUTURISME - Charte Graphique v2.0
+           Humanité augmentée • Pop-art techno-futuriste • Années 70
+        ═══════════════════════════════════════════════════════════════ */
+        
         :root {
-            --bg-dark: #0f1f0f;
-            --bg-medium: #1a2e1a;
-            --bg-card: #1f3a1f;
-            --accent-green: #4ade80;
-            --accent-lime: #a3e635;
-            --accent-orange: #fb923c;
-            --accent-red: #f87171;
-            --accent-blue: #60a5fa;
-            --text-light: #f0f7f0;
-            --text-muted: #a8c4a8;
-            --glow-green: 0 0 40px rgba(74, 222, 128, 0.25);
+            /* Palette principale */
+            --retro-teal: #127676;
+            --retro-orange: #E4632E;
+            --retro-jaune: #E3A535;
+            --retro-ink: #0D1617;
+            --retro-paper: #F2EFE6;
+            
+            /* États sémantiques */
+            --retro-state-success: var(--retro-teal);
+            --retro-state-error: var(--retro-orange);
+            --retro-state-warning: var(--retro-jaune);
+            --retro-state-disabled: rgba(13, 22, 23, 0.4);
         }
 
         * {
@@ -27,45 +32,69 @@
         }
 
         body {
-            font-family: 'Nunito', sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-light);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: var(--retro-ink);
+            color: var(--retro-ink);
             min-height: 100vh;
-            overflow-x: hidden;
             font-size: 17px;
             line-height: 1.6;
+            padding: 12px;
         }
 
-        /* Animated background */
-        .bg-pattern {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            opacity: 0.12;
-            background: 
-                radial-gradient(circle at 20% 30%, var(--accent-green) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, var(--accent-lime) 0%, transparent 40%);
-            animation: pulse 8s ease-in-out infinite alternate;
+        /* ═══════════════════════════════════════════════════════════════
+           CADRE ART NOUVEAU
+        ═══════════════════════════════════════════════════════════════ */
+        
+        .page-frame {
+            background: var(--retro-paper);
+            border: 4px solid var(--retro-orange);
+            border-radius: 8px;
+            position: relative;
+            min-height: calc(100vh - 24px);
+            padding: 40px 24px;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-        @keyframes pulse {
-            0% { opacity: 0.08; transform: scale(1); }
-            100% { opacity: 0.15; transform: scale(1.1); }
+        /* Motifs floraux aux coins */
+        .corner-flourish {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            color: var(--retro-teal);
+            opacity: 0.5;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+        .corner-flourish.top-left { top: 8px; left: 12px; }
+        .corner-flourish.top-right { top: 8px; right: 12px; transform: scaleX(-1); }
+        .corner-flourish.bottom-left { bottom: 8px; left: 12px; transform: scaleY(-1); }
+        .corner-flourish.bottom-right { bottom: 8px; right: 12px; transform: scale(-1); }
 
         .container {
             position: relative;
             z-index: 1;
-            max-width: 850px;
+            max-width: 750px;
             margin: 0 auto;
-            padding: 1.5rem;
-            min-height: 100vh;
         }
 
-        /* Screens */
+        /* ═══════════════════════════════════════════════════════════════
+           TYPOGRAPHIE
+        ═══════════════════════════════════════════════════════════════ */
+        
+        .title-geo {
+            font-family: Impact, 'Arial Black', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 900;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           SCREENS
+        ═══════════════════════════════════════════════════════════════ */
+        
         .screen {
             display: none;
             animation: fadeIn 0.5s ease-out;
@@ -80,104 +109,177 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Intro Screen */
+        /* ═══════════════════════════════════════════════════════════════
+           INTRO SCREEN
+        ═══════════════════════════════════════════════════════════════ */
+        
         .intro-screen {
             text-align: center;
-            padding-top: 8vh;
+            padding-top: 4vh;
         }
 
         .logo {
-            font-family: 'Outfit', sans-serif;
-            font-size: clamp(2.8rem, 9vw, 4.5rem);
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--accent-green), var(--accent-lime));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-            letter-spacing: -1px;
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            color: var(--retro-teal);
+            margin-bottom: 0.3rem;
+            text-shadow: 3px 3px 0 var(--retro-orange);
         }
 
         .subtitle {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+            color: var(--retro-ink);
+            margin-bottom: 2rem;
             font-weight: 600;
+            opacity: 0.8;
         }
 
+        /* Visuel intro - style art nouveau */
         .intro-visual {
-            width: 180px;
-            height: 180px;
+            width: 160px;
+            height: 160px;
             margin: 1.5rem auto;
             position: relative;
+            border: 3px solid var(--retro-teal);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(18, 118, 118, 0.1), rgba(227, 165, 53, 0.1));
         }
 
-        .leaf-icon {
-            width: 100%;
-            height: 100%;
+        .intro-visual svg {
+            width: 80px;
+            height: 80px;
             animation: float 3s ease-in-out infinite;
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
+            50% { transform: translateY(-8px); }
         }
 
         .intro-text {
-            max-width: 580px;
-            margin: 0 auto 2.5rem;
-            font-size: 1.1rem;
-            color: var(--text-light);
+            max-width: 550px;
+            margin: 0 auto 2rem;
+            font-size: 1.05rem;
+            color: var(--retro-ink);
         }
 
         .highlight {
-            color: var(--accent-lime);
+            color: var(--retro-orange);
             font-weight: 700;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.1rem;
+        .highlight-teal {
+            color: var(--retro-teal);
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            border: none;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           BOUTONS PILL RETROFUTURISTES
+        ═══════════════════════════════════════════════════════════════ */
+        
+        .retro-btn-pill {
+            display: inline-flex;
+            align-items: stretch;
             border-radius: 50px;
+            border: 3px solid var(--retro-teal);
+            overflow: hidden;
             cursor: pointer;
             transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 4px 4px 0 var(--retro-ink);
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-green), var(--accent-lime));
-            color: var(--bg-dark);
+        .retro-btn-pill:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 var(--retro-ink);
         }
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--glow-green);
+        .retro-btn-pill-text {
+            background: var(--retro-jaune);
+            color: var(--retro-ink);
+            padding: 0.85rem 1.8rem;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            line-height: 1.2;
+            display: flex;
+            align-items: center;
+        }
+
+        .retro-btn-pill-icon {
+            background: var(--retro-orange);
+            color: var(--retro-paper);
+            width: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
         }
 
         .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
             background: transparent;
-            border: 2px solid var(--accent-green);
-            color: var(--accent-green);
+            border: 2px solid var(--retro-teal);
+            border-radius: 50px;
+            color: var(--retro-teal);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
         }
 
         .btn-secondary:hover {
-            background: var(--accent-green);
-            color: var(--bg-dark);
+            background: var(--retro-teal);
+            color: var(--retro-paper);
         }
 
-        /* Quiz Screen */
+        /* ═══════════════════════════════════════════════════════════════
+           SÉPARATEUR ART NOUVEAU
+        ═══════════════════════════════════════════════════════════════ */
+        
+        .retro-separator {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 2rem 0;
+            color: var(--retro-teal);
+        }
+
+        .retro-separator::before,
+        .retro-separator::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                var(--retro-teal) 20%,
+                var(--retro-teal) 80%,
+                transparent
+            );
+        }
+
+        .retro-separator .flourish {
+            font-size: 1.3rem;
+            opacity: 0.7;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           QUIZ SCREEN
+        ═══════════════════════════════════════════════════════════════ */
+        
         .quiz-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1.5rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(74, 222, 128, 0.15);
+            border-bottom: 2px solid var(--retro-teal);
             flex-wrap: wrap;
             gap: 1rem;
         }
@@ -188,103 +290,120 @@
         }
 
         .progress-text {
-            font-size: 0.95rem;
-            color: var(--text-muted);
+            font-size: 0.9rem;
+            color: var(--retro-ink);
             margin-bottom: 0.5rem;
             font-weight: 600;
+            opacity: 0.8;
         }
 
         .progress-bar {
-            height: 10px;
-            background: var(--bg-medium);
+            height: 12px;
+            background: rgba(18, 118, 118, 0.15);
             border-radius: 10px;
             overflow: hidden;
+            border: 2px solid var(--retro-teal);
         }
 
+        /* Gradient teal → orange → jaune pour la progression */
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--accent-green), var(--accent-lime));
-            border-radius: 10px;
+            background: linear-gradient(90deg, var(--retro-teal), var(--retro-orange), var(--retro-jaune));
+            border-radius: 8px;
             transition: width 0.5s ease;
         }
 
         .score-display {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--accent-lime);
-            background: var(--bg-medium);
+            font-family: Impact, 'Arial Black', sans-serif;
+            font-size: 1.3rem;
+            color: var(--retro-paper);
+            background: var(--retro-teal);
             padding: 0.5rem 1.2rem;
             border-radius: 30px;
+            border: 2px solid var(--retro-ink);
         }
 
+        /* ═══════════════════════════════════════════════════════════════
+           CARTES RETROFUTURISTES
+        ═══════════════════════════════════════════════════════════════ */
+        
         .question-card {
-            background: var(--bg-card);
-            border-radius: 20px;
-            padding: 2rem;
+            background: var(--retro-paper);
+            border: 3px solid var(--retro-teal);
+            border-radius: 24px 8px 24px 8px;
+            padding: 1.8rem;
             margin-bottom: 1.5rem;
-            border: 1px solid rgba(74, 222, 128, 0.1);
+            box-shadow: inset 0 0 0 2px var(--retro-orange);
         }
 
         .question-category {
             display: inline-block;
-            font-size: 0.9rem;
-            color: var(--bg-dark);
-            background: var(--accent-green);
-            padding: 0.3rem 1rem;
+            font-size: 0.85rem;
+            color: var(--retro-paper);
+            background: var(--retro-teal);
+            padding: 0.35rem 1rem;
             border-radius: 20px;
             font-weight: 700;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .question-text {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.4rem;
+            font-family: Impact, 'Arial Black', sans-serif;
+            font-size: 1.3rem;
             font-weight: 700;
-            line-height: 1.5;
-            margin-bottom: 1.8rem;
-            color: var(--text-light);
+            line-height: 1.4;
+            margin-bottom: 1.5rem;
+            color: var(--retro-ink);
         }
 
+        /* ═══════════════════════════════════════════════════════════════
+           OPTIONS
+        ═══════════════════════════════════════════════════════════════ */
+        
         .options {
             display: flex;
             flex-direction: column;
-            gap: 0.9rem;
+            gap: 0.8rem;
         }
 
         .option {
-            padding: 1.1rem 1.4rem;
-            background: rgba(74, 222, 128, 0.05);
-            border: 2px solid rgba(74, 222, 128, 0.2);
-            border-radius: 14px;
+            padding: 1rem 1.2rem;
+            background: var(--retro-paper);
+            border: 2px solid var(--retro-teal);
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.25s ease;
-            font-size: 1.05rem;
+            font-size: 1rem;
             text-align: left;
             font-weight: 600;
-            color: var(--text-light);
+            color: var(--retro-ink);
         }
 
         .option:hover:not(.disabled) {
-            background: rgba(74, 222, 128, 0.1);
-            border-color: var(--accent-green);
+            background: rgba(18, 118, 118, 0.08);
+            border-color: var(--retro-orange);
             transform: translateX(5px);
         }
 
         .option.selected {
-            border-color: var(--accent-lime);
-            background: rgba(163, 230, 53, 0.1);
+            border-color: var(--retro-jaune);
+            background: rgba(227, 165, 53, 0.15);
         }
 
+        /* SUCCÈS = TEAL (cohérence sémantique) */
         .option.correct {
-            border-color: var(--accent-green);
-            background: rgba(74, 222, 128, 0.2);
+            border-color: var(--retro-teal);
+            background: rgba(18, 118, 118, 0.2);
+            box-shadow: inset 0 0 0 2px var(--retro-teal);
             animation: correctPulse 0.5s ease;
         }
 
+        /* ERREUR = ORANGE (cohérence sémantique) */
         .option.incorrect {
-            border-color: var(--accent-red);
-            background: rgba(248, 113, 113, 0.1);
+            border-color: var(--retro-orange);
+            background: rgba(228, 99, 46, 0.15);
         }
 
         .option.disabled {
@@ -294,13 +413,17 @@
 
         @keyframes correctPulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.015); }
+            50% { transform: scale(1.01); }
         }
 
+        /* ═══════════════════════════════════════════════════════════════
+           ZONES DE FEEDBACK
+        ═══════════════════════════════════════════════════════════════ */
+        
         .feedback {
             margin-top: 1.5rem;
-            padding: 1.5rem;
-            border-radius: 14px;
+            padding: 1.3rem;
+            border-radius: 12px;
             display: none;
         }
 
@@ -314,51 +437,56 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Feedback succès = TEAL */
         .feedback.correct {
-            background: rgba(74, 222, 128, 0.1);
-            border-left: 5px solid var(--accent-green);
+            background: rgba(18, 118, 118, 0.1);
+            border-left: 5px solid var(--retro-teal);
         }
 
+        /* Feedback erreur = ORANGE */
         .feedback.incorrect {
-            background: rgba(248, 113, 113, 0.1);
-            border-left: 5px solid var(--accent-red);
+            background: rgba(228, 99, 46, 0.1);
+            border-left: 5px solid var(--retro-orange);
         }
 
         .feedback-title {
-            font-family: 'Outfit', sans-serif;
+            font-family: Impact, 'Arial Black', sans-serif;
             font-weight: 700;
-            font-size: 1.15rem;
-            margin-bottom: 0.6rem;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .feedback.correct .feedback-title {
-            color: var(--accent-green);
+            color: var(--retro-teal);
         }
 
         .feedback.incorrect .feedback-title {
-            color: var(--accent-red);
+            color: var(--retro-orange);
         }
 
         .feedback-text {
-            color: var(--text-muted);
+            color: var(--retro-ink);
             line-height: 1.7;
-            font-size: 1rem;
+            font-size: 0.95rem;
+            opacity: 0.9;
         }
 
         .feedback-text strong {
-            color: var(--accent-lime);
+            color: var(--retro-teal);
         }
 
         .feedback-source {
-            margin-top: 1rem;
-            padding-top: 0.8rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 0.8rem;
+            padding-top: 0.7rem;
+            border-top: 1px solid rgba(18, 118, 118, 0.2);
         }
 
         .feedback-source a {
-            color: var(--accent-blue);
+            color: var(--retro-orange);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
             display: inline-flex;
             align-items: center;
@@ -367,31 +495,35 @@
         }
 
         .feedback-source a:hover {
-            color: var(--accent-lime);
+            color: var(--retro-teal);
             text-decoration: underline;
         }
 
-        .next-btn {
+        .next-btn-wrapper {
             margin-top: 1.5rem;
-            width: 100%;
+            display: flex;
+            justify-content: center;
         }
 
-        /* Results Screen */
+        /* ═══════════════════════════════════════════════════════════════
+           RESULTS SCREEN
+        ═══════════════════════════════════════════════════════════════ */
+        
         .results-screen {
             text-align: center;
-            padding-top: 4vh;
+            padding-top: 2vh;
         }
 
         .results-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 2.2rem;
-            font-weight: 800;
+            font-size: 2rem;
+            color: var(--retro-teal);
             margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 0 var(--retro-orange);
         }
 
         .score-circle {
-            width: 180px;
-            height: 180px;
+            width: 160px;
+            height: 160px;
             margin: 0 auto 1.5rem;
             position: relative;
             display: flex;
@@ -406,7 +538,7 @@
 
         .score-circle-bg {
             fill: none;
-            stroke: var(--bg-medium);
+            stroke: rgba(18, 118, 118, 0.15);
             stroke-width: 14;
         }
 
@@ -415,22 +547,24 @@
             stroke: url(#scoreGradient);
             stroke-width: 14;
             stroke-linecap: round;
-            stroke-dasharray: 502;
-            stroke-dashoffset: 502;
+            stroke-dasharray: 440;
+            stroke-dashoffset: 440;
             transition: stroke-dashoffset 1.5s ease-out;
         }
 
         .score-value {
-            font-family: 'Outfit', sans-serif;
-            font-size: 2.8rem;
-            font-weight: 800;
+            font-family: Impact, 'Arial Black', sans-serif;
+            font-size: 2.5rem;
+            color: var(--retro-teal);
         }
 
         .score-label {
-            font-size: 0.9rem;
-            color: var(--text-muted);
+            font-size: 0.85rem;
+            color: var(--retro-ink);
+            opacity: 0.7;
         }
 
+        /* Stats grid */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -439,32 +573,35 @@
         }
 
         .stat-item {
-            background: var(--bg-medium);
-            padding: 1.2rem;
-            border-radius: 14px;
+            background: rgba(18, 118, 118, 0.08);
+            padding: 1rem;
+            border-radius: 12px;
+            border: 2px solid var(--retro-teal);
             text-align: center;
         }
 
         .stat-value {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--accent-lime);
+            font-family: Impact, 'Arial Black', sans-serif;
+            font-size: 1.4rem;
+            color: var(--retro-orange);
         }
 
         .stat-label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-top: 0.3rem;
+            font-size: 0.8rem;
+            color: var(--retro-ink);
+            margin-top: 0.2rem;
             font-weight: 600;
+            opacity: 0.8;
         }
 
+        /* Profile card */
         .profile-card {
-            background: var(--bg-card);
-            border-radius: 20px;
-            padding: 2rem;
+            background: var(--retro-paper);
+            border: 3px solid var(--retro-teal);
+            border-radius: 24px 8px 24px 8px;
+            padding: 1.5rem;
             margin: 1.5rem 0;
-            border: 1px solid rgba(74, 222, 128, 0.15);
+            box-shadow: inset 0 0 0 2px var(--retro-orange);
             text-align: left;
         }
 
@@ -476,42 +613,48 @@
         }
 
         .profile-badge {
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            background: var(--bg-medium);
+            font-size: 1.8rem;
+            background: rgba(18, 118, 118, 0.1);
+            border: 2px solid var(--retro-teal);
         }
 
         .profile-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.4rem;
-            font-weight: 700;
+            font-family: Impact, 'Arial Black', sans-serif;
+            font-size: 1.3rem;
+            color: var(--retro-teal);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .profile-description {
-            color: var(--text-muted);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
+            color: var(--retro-ink);
+            line-height: 1.6;
+            margin-bottom: 1.2rem;
+            opacity: 0.9;
         }
 
+        /* Tips section - highlight avec jaune */
         .tips-section {
-            background: rgba(74, 222, 128, 0.05);
-            padding: 1.3rem;
+            background: rgba(227, 165, 53, 0.12);
+            padding: 1.2rem;
             border-radius: 12px;
+            border: 2px solid var(--retro-jaune);
         }
 
         .tips-title {
             font-weight: 700;
-            color: var(--accent-lime);
-            margin-bottom: 0.8rem;
+            color: var(--retro-orange);
+            margin-bottom: 0.7rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 1.05rem;
+            font-size: 1rem;
         }
 
         .tips-list {
@@ -519,17 +662,23 @@
         }
 
         .tips-list li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
+            padding: 0.4rem 0;
+            padding-left: 1.4rem;
             position: relative;
-            color: var(--text-muted);
+            color: var(--retro-ink);
+            font-size: 0.95rem;
         }
 
         .tips-list li::before {
             content: "→";
             position: absolute;
             left: 0;
-            color: var(--accent-green);
+            color: var(--retro-teal);
+            font-weight: 700;
+        }
+
+        .tips-list a {
+            color: var(--retro-orange);
             font-weight: 700;
         }
 
@@ -541,18 +690,27 @@
             flex-wrap: wrap;
         }
 
-        /* Mobile */
+        /* ═══════════════════════════════════════════════════════════════
+           RESPONSIVE
+        ═══════════════════════════════════════════════════════════════ */
+        
         @media (max-width: 600px) {
-            .container {
-                padding: 1rem;
+            body {
+                padding: 8px;
+            }
+            
+            .page-frame {
+                padding: 30px 16px;
+                min-height: calc(100vh - 16px);
             }
 
             .logo {
-                font-size: 2.3rem;
+                font-size: 2rem;
+                text-shadow: 2px 2px 0 var(--retro-orange);
             }
 
             .question-text {
-                font-size: 1.2rem;
+                font-size: 1.15rem;
             }
 
             .stats-grid {
@@ -560,141 +718,189 @@
             }
 
             .option {
-                font-size: 1rem;
-                padding: 1rem 1.2rem;
+                font-size: 0.95rem;
+                padding: 0.9rem 1rem;
+            }
+            
+            .corner-flourish {
+                font-size: 1.5rem;
+                width: 35px;
+                height: 35px;
+            }
+            
+            .retro-btn-pill-text {
+                padding: 0.7rem 1.3rem;
+                font-size: 0.9rem;
+            }
+            
+            .retro-btn-pill-icon {
+                width: 45px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="bg-pattern"></div>
-    
-    <div class="container">
-        <!-- Intro Screen -->
-        <div id="intro-screen" class="screen intro-screen active">
-            <h1 class="logo">ÉcoIA Challenge</h1>
-            <p class="subtitle">L'empreinte cachée de l'intelligence artificielle</p>
-            
-            <div class="intro-visual">
-                <svg class="leaf-icon" viewBox="0 0 100 100">
-                    <defs>
-                        <linearGradient id="leafGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#4ade80"/>
-                            <stop offset="100%" style="stop-color:#a3e635"/>
-                        </linearGradient>
-                    </defs>
-                    <path fill="url(#leafGradient)" d="M50 10 C30 10 10 30 10 50 C10 70 30 90 50 90 C50 90 50 50 50 50 C50 50 90 50 90 50 C90 30 70 10 50 10 Z" opacity="0.8"/>
-                    <path fill="none" stroke="#4ade80" stroke-width="2" d="M50 50 L50 85 M50 60 L35 50 M50 70 L65 60"/>
-                    <circle cx="70" cy="30" r="15" fill="none" stroke="#a3e635" stroke-width="2" stroke-dasharray="5,3"/>
-                    <text x="70" y="35" text-anchor="middle" fill="#a3e635" font-size="12" font-family="monospace">AI</text>
-                </svg>
+    <div class="page-frame">
+        <!-- Motifs floraux art nouveau aux coins -->
+        <span class="corner-flourish top-left">❧</span>
+        <span class="corner-flourish top-right">❧</span>
+        <span class="corner-flourish bottom-left">❧</span>
+        <span class="corner-flourish bottom-right">❧</span>
+        
+        <div class="container">
+            <!-- ═══════════════════════════════════════════════════════════════
+                 INTRO SCREEN
+            ═══════════════════════════════════════════════════════════════ -->
+            <div id="intro-screen" class="screen intro-screen active">
+                <h1 class="logo title-geo">ÉcoIA Challenge</h1>
+                <p class="subtitle">L'empreinte cachée de l'intelligence artificielle</p>
+                
+                <div class="intro-visual">
+                    <svg viewBox="0 0 80 80">
+                        <defs>
+                            <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#127676"/>
+                                <stop offset="100%" style="stop-color:#E3A535"/>
+                            </linearGradient>
+                        </defs>
+                        <!-- Feuille stylisée -->
+                        <path fill="url(#leafGrad)" d="M40 8 C20 8 8 25 8 40 C8 55 20 72 40 72 C40 72 40 40 40 40 C40 40 72 40 72 40 C72 25 55 8 40 8 Z" opacity="0.85"/>
+                        <path fill="none" stroke="#127676" stroke-width="2" d="M40 40 L40 65 M40 48 L30 40 M40 56 L50 48"/>
+                        <!-- Cercle AI -->
+                        <circle cx="58" cy="22" r="12" fill="none" stroke="#E4632E" stroke-width="2"/>
+                        <text x="58" y="26" text-anchor="middle" fill="#E4632E" font-size="10" font-family="Impact, sans-serif" font-weight="bold">AI</text>
+                    </svg>
+                </div>
+                
+                <p class="intro-text">
+                    ChatGPT, Midjourney, Copilot... Tu utilises peut-être l'IA tous les jours. 
+                    Mais sais-tu combien <span class="highlight">d'énergie</span>, <span class="highlight-teal">d'eau</span> 
+                    et de <span class="highlight">CO₂</span> sont nécessaires pour générer une seule réponse ?
+                </p>
+                
+                <div class="retro-separator">
+                    <span class="flourish">✿</span>
+                </div>
+                
+                <p class="intro-text" style="margin-bottom: 2rem;">
+                    <strong>15 questions</strong> pour tester tes connaissances sur l'impact écologique réel de l'IA !
+                </p>
+                
+                <button class="retro-btn-pill" onclick="startQuiz()">
+                    <span class="retro-btn-pill-text">Relever le défi</span>
+                    <span class="retro-btn-pill-icon">»</span>
+                </button>
             </div>
-            
-            <p class="intro-text">
-                ChatGPT, Midjourney, Copilot... Tu utilises peut-être l'IA tous les jours. 
-                Mais sais-tu combien <span class="highlight">d'énergie</span>, <span class="highlight">d'eau</span> 
-                et de <span class="highlight">CO₂</span> sont nécessaires pour générer une seule réponse ?
-                <br><br>
-                <strong>15 questions</strong> pour tester tes connaissances sur l'impact écologique réel de l'IA !
-            </p>
-            
-            <button class="btn btn-primary" onclick="startQuiz()">
-                Relever le défi
-            </button>
-        </div>
 
-        <!-- Quiz Screen -->
-        <div id="quiz-screen" class="screen">
-            <div class="quiz-header">
-                <div class="progress-container">
-                    <p class="progress-text">Question <span id="current-q">1</span> sur <span id="total-q">15</span></p>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progress-fill" style="width: 6.67%"></div>
+            <!-- ═══════════════════════════════════════════════════════════════
+                 QUIZ SCREEN
+            ═══════════════════════════════════════════════════════════════ -->
+            <div id="quiz-screen" class="screen">
+                <div class="quiz-header">
+                    <div class="progress-container">
+                        <p class="progress-text">Question <span id="current-q">1</span> sur <span id="total-q">15</span></p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill" style="width: 6.67%"></div>
+                        </div>
+                    </div>
+                    <div class="score-display" id="score-display">0 PTS</div>
+                </div>
+
+                <div class="question-card">
+                    <span class="question-category" id="question-category">Énergie</span>
+                    <h2 class="question-text" id="question-text">Question loading...</h2>
+                    
+                    <div class="options" id="options-container">
+                        <!-- Options dynamiques -->
+                    </div>
+
+                    <div class="feedback" id="feedback">
+                        <p class="feedback-title" id="feedback-title">Titre</p>
+                        <p class="feedback-text" id="feedback-text">Explication...</p>
+                        <div class="feedback-source" id="feedback-source"></div>
                     </div>
                 </div>
-                <div class="score-display" id="score-display">0 pts</div>
+
+                                <div class="next-btn-wrapper" id="next-btn-wrapper" style="display: none;">
+                    <button class="retro-btn-pill" onclick="nextQuestion()">
+                        <span class="retro-btn-pill-text" id="next-btn-text">Question suivante</span>
+                        <span class="retro-btn-pill-icon">»</span>
+                    </button>
+                </div>
             </div>
 
-            <div class="question-card">
-                <span class="question-category" id="question-category">Énergie</span>
-                <h2 class="question-text" id="question-text">Question loading...</h2>
+            <!-- ═══════════════════════════════════════════════════════════════
+                 RESULTS SCREEN
+            ═══════════════════════════════════════════════════════════════ -->
+            <div id="results-screen" class="screen results-screen">
+                <h1 class="results-title title-geo">🎯 Tes résultats</h1>
                 
-                <div class="options" id="options-container">
-                    <!-- Options dynamiques -->
+                <div class="score-circle">
+                    <svg width="160" height="160">
+                        <defs>
+                            <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#127676"/>
+                                <stop offset="50%" style="stop-color:#E4632E"/>
+                                <stop offset="100%" style="stop-color:#E3A535"/>
+                            </linearGradient>
+                        </defs>
+                        <circle class="score-circle-bg" cx="80" cy="80" r="70"/>
+                        <circle class="score-circle-fill" id="score-circle-fill" cx="80" cy="80" r="70"/>
+                    </svg>
+                    <div>
+                        <span class="score-value" id="final-score">0</span>
+                        <span class="score-label">points</span>
+                    </div>
                 </div>
 
-                <div class="feedback" id="feedback">
-                    <p class="feedback-title" id="feedback-title">Titre</p>
-                    <p class="feedback-text" id="feedback-text">Explication...</p>
-                    <div class="feedback-source" id="feedback-source"></div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correct-count">0</div>
+                        <div class="stat-label">Bonnes réponses</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="accuracy">0%</div>
+                        <div class="stat-label">Précision</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="rank">-</div>
+                        <div class="stat-label">Niveau</div>
+                    </div>
                 </div>
-            </div>
 
-            <button class="btn btn-primary next-btn" id="next-btn" onclick="nextQuestion()" style="display: none;">
-                Question suivante
-            </button>
-        </div>
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-badge" id="profile-badge">🌱</div>
+                        <h2 class="profile-title" id="profile-title">Ton profil</h2>
+                    </div>
+                    <p class="profile-description" id="profile-description">Description du profil...</p>
+                    
+                    <div class="tips-section">
+                        <h3 class="tips-title">💡 Pour réduire ton impact</h3>
+                        <ul class="tips-list" id="tips-list">
+                            <!-- Tips dynamiques -->
+                        </ul>
+                    </div>
+                </div>
 
-        <!-- Results Screen -->
-        <div id="results-screen" class="screen results-screen">
-            <h1 class="results-title">🎯 Tes résultats</h1>
-            
-            <div class="score-circle">
-                <svg width="180" height="180">
-                    <defs>
-                        <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" style="stop-color:#4ade80"/>
-                            <stop offset="100%" style="stop-color:#a3e635"/>
-                        </linearGradient>
-                    </defs>
-                    <circle class="score-circle-bg" cx="90" cy="90" r="80"/>
-                    <circle class="score-circle-fill" id="score-circle-fill" cx="90" cy="90" r="80"/>
-                </svg>
-                <div>
-                    <span class="score-value" id="final-score">0</span>
-                    <span class="score-label">points</span>
+                <div class="action-buttons">
+                    <button class="retro-btn-pill" onclick="restartQuiz()">
+                        <span class="retro-btn-pill-text">Rejouer</span>
+                        <span class="retro-btn-pill-icon">↻</span>
+                    </button>
+                    <button class="btn-secondary" onclick="shareResults()">
+                        📤 Partager
+                    </button>
                 </div>
-            </div>
-
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-value" id="correct-count">0</div>
-                    <div class="stat-label">Bonnes réponses</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value" id="accuracy">0%</div>
-                    <div class="stat-label">Précision</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value" id="rank">-</div>
-                    <div class="stat-label">Niveau</div>
-                </div>
-            </div>
-
-            <div class="profile-card">
-                <div class="profile-header">
-                    <div class="profile-badge" id="profile-badge">🌱</div>
-                    <h2 class="profile-title" id="profile-title">Ton profil</h2>
-                </div>
-                <p class="profile-description" id="profile-description">Description du profil...</p>
-                
-                <div class="tips-section">
-                    <h3 class="tips-title">💡 Pour réduire ton impact</h3>
-                    <ul class="tips-list" id="tips-list">
-                        <!-- Tips dynamiques -->
-                    </ul>
-                </div>
-            </div>
-
-            <div class="action-buttons">
-                <button class="btn btn-primary" onclick="restartQuiz()">Rejouer</button>
-                <button class="btn btn-secondary" onclick="shareResults()">Partager</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Questions avec équivalents parlants pour ados (15 questions)
+        // ═══════════════════════════════════════════════════════════════
+        // QUESTIONS (15 questions avec équivalents parlants)
+        // ═══════════════════════════════════════════════════════════════
+        
         const questions = [
             {
                 category: "💧 Eau",
@@ -908,7 +1114,10 @@
             }
         ];
 
-        // Profils (adaptés pour 15 questions = 150 points max)
+        // ═══════════════════════════════════════════════════════════════
+        // PROFILS (adaptés pour 15 questions = 150 points max)
+        // ═══════════════════════════════════════════════════════════════
+        
         const profiles = [
             {
                 minScore: 0,
@@ -954,20 +1163,22 @@
                 description: "Impressionnant ! Tu es incollable. Tu as toutes les clés pour utiliser l'IA intelligemment et inspirer les autres à faire pareil.",
                 tips: [
                     "Propose un atelier de sensibilisation dans ton école",
-                    "Explore l'outil ComparIA pour comparer l'impact des différentes IA → comparia.beta.gouv.fr",
+                    "Explore l'outil ComparIA pour comparer l'impact des différentes IA",
                     "Continue à te tenir informé : ce domaine évolue très vite"
                 ],
                 compariaLink: "https://comparia.beta.gouv.fr/"
             }
         ];
 
-        // État du jeu
+        // ═══════════════════════════════════════════════════════════════
+        // ÉTAT DU JEU
+        // ═══════════════════════════════════════════════════════════════
+        
         let currentQuestion = 0;
         let score = 0;
         let correctAnswers = 0;
         let answered = false;
 
-        // Éléments DOM
         const screens = {
             intro: document.getElementById('intro-screen'),
             quiz: document.getElementById('quiz-screen'),
@@ -984,7 +1195,7 @@
             currentQuestion = 0;
             score = 0;
             correctAnswers = 0;
-            document.getElementById('score-display').textContent = '0 pts';
+            document.getElementById('score-display').textContent = '0 PTS';
             showScreen('quiz');
             loadQuestion();
         }
@@ -1012,7 +1223,7 @@
             });
             
             document.getElementById('feedback').classList.remove('show', 'correct', 'incorrect');
-            document.getElementById('next-btn').style.display = 'none';
+            document.getElementById('next-btn-wrapper').style.display = 'none';
         }
 
         function selectAnswer(index) {
@@ -1037,21 +1248,21 @@
             if (isCorrect) {
                 score += 10;
                 correctAnswers++;
-                document.getElementById('score-display').textContent = `${score} pts`;
+                document.getElementById('score-display').textContent = `${score} PTS`;
                 feedback.classList.add('correct');
-                document.getElementById('feedback-title').textContent = '✓ Bonne réponse !';
+                document.getElementById('feedback-title').textContent = '✓ BONNE RÉPONSE !';
             } else {
                 feedback.classList.add('incorrect');
-                document.getElementById('feedback-title').textContent = '✗ Pas tout à fait...';
+                document.getElementById('feedback-title').textContent = '✗ PAS TOUT À FAIT...';
             }
             
             document.getElementById('feedback-text').innerHTML = q.explanation;
             document.getElementById('feedback-source').innerHTML = `<a href="${q.sourceUrl}" target="_blank" rel="noopener">📎 Source : ${q.sourceName}</a>`;
             feedback.classList.add('show');
             
-            const nextBtn = document.getElementById('next-btn');
-            nextBtn.style.display = 'block';
-            nextBtn.textContent = currentQuestion < questions.length - 1 ? 'Question suivante' : 'Voir mes résultats';
+            const nextBtnWrapper = document.getElementById('next-btn-wrapper');
+            nextBtnWrapper.style.display = 'flex';
+            document.getElementById('next-btn-text').textContent = currentQuestion < questions.length - 1 ? 'Question suivante' : 'Voir mes résultats';
         }
 
         function nextQuestion() {
@@ -1069,10 +1280,10 @@
             const percentage = Math.round((correctAnswers / questions.length) * 100);
             const profile = profiles.find(p => score >= p.minScore && score <= p.maxScore);
             
-            // Animer le cercle
+            // Animer le cercle (circonférence = 2 * PI * 70 ≈ 440)
             setTimeout(() => {
                 const circle = document.getElementById('score-circle-fill');
-                const circumference = 2 * Math.PI * 80;
+                const circumference = 2 * Math.PI * 70;
                 const offset = circumference - (percentage / 100) * circumference;
                 circle.style.strokeDasharray = circumference;
                 circle.style.strokeDashoffset = offset;
@@ -1097,9 +1308,8 @@
             tipsList.innerHTML = '';
             profile.tips.forEach(tip => {
                 const li = document.createElement('li');
-                // Vérifier si le tip contient une mention de ComparIA
                 if (tip.includes('ComparIA')) {
-                    li.innerHTML = 'Explore l\'outil <a href="https://comparia.beta.gouv.fr/" target="_blank" rel="noopener" style="color: var(--accent-lime); font-weight: 700;">ComparIA</a> pour comparer l\'impact des différentes IA';
+                    li.innerHTML = 'Explore l\'outil <a href="https://comparia.beta.gouv.fr/" target="_blank" rel="noopener">ComparIA</a> pour comparer l\'impact des différentes IA';
                 } else {
                     li.textContent = tip;
                 }
