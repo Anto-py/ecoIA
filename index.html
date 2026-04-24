@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ÉcoIA Challenge - L'empreinte cachée de l'IA</title>
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ÉcoIA Challenge - L'empreinte cachée de l'IA</title>
+<style>
         /* ═══════════════════════════════════════════════════════════════
            RETROFUTURISME - Charte Graphique v2.0
            Humanité augmentée • Pop-art techno-futuriste • Années 70
@@ -747,165 +748,146 @@
     </style>
 </head>
 <body>
-    <div class="page-frame">
-        <!-- Motifs floraux art nouveau aux coins -->
-        <span class="corner-flourish top-left">❧</span>
-        <span class="corner-flourish top-right">❧</span>
-        <span class="corner-flourish bottom-left">❧</span>
-        <span class="corner-flourish bottom-right">❧</span>
-        
-        <div class="container">
-            <!-- ═══════════════════════════════════════════════════════════════
+<div class="page-frame">
+<!-- Motifs floraux art nouveau aux coins -->
+<span class="corner-flourish top-left">❧</span>
+<span class="corner-flourish top-right">❧</span>
+<span class="corner-flourish bottom-left">❧</span>
+<span class="corner-flourish bottom-right">❧</span>
+<div class="container">
+<!-- ═══════════════════════════════════════════════════════════════
                  INTRO SCREEN
             ═══════════════════════════════════════════════════════════════ -->
-            <div id="intro-screen" class="screen intro-screen active">
-                <h1 class="logo title-geo">ÉcoIA Challenge</h1>
-                <p class="subtitle">L'empreinte cachée de l'intelligence artificielle</p>
-                
-                <div class="intro-visual">
-                    <svg viewBox="0 0 80 80">
-                        <defs>
-                            <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#127676"/>
-                                <stop offset="100%" style="stop-color:#E3A535"/>
-                            </linearGradient>
-                        </defs>
-                        <!-- Feuille stylisée -->
-                        <path fill="url(#leafGrad)" d="M40 8 C20 8 8 25 8 40 C8 55 20 72 40 72 C40 72 40 40 40 40 C40 40 72 40 72 40 C72 25 55 8 40 8 Z" opacity="0.85"/>
-                        <path fill="none" stroke="#127676" stroke-width="2" d="M40 40 L40 65 M40 48 L30 40 M40 56 L50 48"/>
-                        <!-- Cercle AI -->
-                        <circle cx="58" cy="22" r="12" fill="none" stroke="#E4632E" stroke-width="2"/>
-                        <text x="58" y="26" text-anchor="middle" fill="#E4632E" font-size="10" font-family="Impact, sans-serif" font-weight="bold">AI</text>
-                    </svg>
-                </div>
-                
-                <p class="intro-text">
+<div class="screen intro-screen active" id="intro-screen">
+<h1 class="logo title-geo">ÉcoIA Challenge</h1>
+<p class="subtitle">L'empreinte cachée de l'intelligence artificielle</p>
+<div class="intro-visual">
+<svg viewbox="0 0 80 80">
+<defs>
+<lineargradient id="leafGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#127676"></stop>
+<stop offset="100%" style="stop-color:#E3A535"></stop>
+</lineargradient>
+</defs>
+<!-- Feuille stylisée -->
+<path d="M40 8 C20 8 8 25 8 40 C8 55 20 72 40 72 C40 72 40 40 40 40 C40 40 72 40 72 40 C72 25 55 8 40 8 Z" fill="url(#leafGrad)" opacity="0.85"></path>
+<path d="M40 40 L40 65 M40 48 L30 40 M40 56 L50 48" fill="none" stroke="#127676" stroke-width="2"></path>
+<!-- Cercle AI -->
+<circle cx="58" cy="22" fill="none" r="12" stroke="#E4632E" stroke-width="2"></circle>
+<text fill="#E4632E" font-family="Impact, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" x="58" y="26">AI</text>
+</svg>
+</div>
+<p class="intro-text">
                     ChatGPT, Midjourney, Copilot... Tu utilises peut-être l'IA tous les jours. 
                     Mais sais-tu combien <span class="highlight">d'énergie</span>, <span class="highlight-teal">d'eau</span> 
                     et de <span class="highlight">CO₂</span> sont nécessaires pour générer une seule réponse ?
                 </p>
-                
-                <div class="retro-separator">
-                    <span class="flourish">✿</span>
-                </div>
-                
-                <p class="intro-text" style="margin-bottom: 2rem;">
-                    <strong>15 questions</strong> pour tester tes connaissances sur l'impact écologique réel de l'IA !
+<div class="retro-separator">
+<span class="flourish">✿</span>
+</div>
+<p class="intro-text" style="margin-bottom: 2rem;">
+<strong>15 questions</strong> pour tester tes connaissances sur l'impact écologique réel de l'IA !
                 </p>
-                
-                <button class="retro-btn-pill" onclick="startQuiz()">
-                    <span class="retro-btn-pill-text">Relever le défi</span>
-                    <span class="retro-btn-pill-icon">»</span>
-                </button>
-            </div>
-
-            <!-- ═══════════════════════════════════════════════════════════════
+<button class="retro-btn-pill" onclick="startQuiz()">
+<span class="retro-btn-pill-text">Relever le défi</span>
+<span class="retro-btn-pill-icon">»</span>
+</button>
+</div>
+<!-- ═══════════════════════════════════════════════════════════════
                  QUIZ SCREEN
             ═══════════════════════════════════════════════════════════════ -->
-            <div id="quiz-screen" class="screen">
-                <div class="quiz-header">
-                    <div class="progress-container">
-                        <p class="progress-text">Question <span id="current-q">1</span> sur <span id="total-q">15</span></p>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="progress-fill" style="width: 6.67%"></div>
-                        </div>
-                    </div>
-                    <div class="score-display" id="score-display">0 PTS</div>
-                </div>
-
-                <div class="question-card">
-                    <span class="question-category" id="question-category">Énergie</span>
-                    <h2 class="question-text" id="question-text">Question loading...</h2>
-                    
-                    <div class="options" id="options-container">
-                        <!-- Options dynamiques -->
-                    </div>
-
-                    <div class="feedback" id="feedback">
-                        <p class="feedback-title" id="feedback-title">Titre</p>
-                        <p class="feedback-text" id="feedback-text">Explication...</p>
-                        <div class="feedback-source" id="feedback-source"></div>
-                    </div>
-                </div>
-
-                                <div class="next-btn-wrapper" id="next-btn-wrapper" style="display: none;">
-                    <button class="retro-btn-pill" onclick="nextQuestion()">
-                        <span class="retro-btn-pill-text" id="next-btn-text">Question suivante</span>
-                        <span class="retro-btn-pill-icon">»</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- ═══════════════════════════════════════════════════════════════
+<div class="screen" id="quiz-screen">
+<div class="quiz-header">
+<div class="progress-container">
+<p class="progress-text">Question <span id="current-q">1</span> sur <span id="total-q">15</span></p>
+<div class="progress-bar">
+<div class="progress-fill" id="progress-fill" style="width: 6.67%"></div>
+</div>
+</div>
+<div class="score-display" id="score-display">0 PTS</div>
+</div>
+<div class="question-card">
+<span class="question-category" id="question-category">Énergie</span>
+<h2 class="question-text" id="question-text">Question loading...</h2>
+<div class="options" id="options-container">
+<!-- Options dynamiques -->
+</div>
+<div class="feedback" id="feedback">
+<p class="feedback-title" id="feedback-title">Titre</p>
+<p class="feedback-text" id="feedback-text">Explication...</p>
+<div class="feedback-source" id="feedback-source"></div>
+</div>
+</div>
+<div class="next-btn-wrapper" id="next-btn-wrapper" style="display: none;">
+<button class="retro-btn-pill" onclick="nextQuestion()">
+<span class="retro-btn-pill-text" id="next-btn-text">Question suivante</span>
+<span class="retro-btn-pill-icon">»</span>
+</button>
+</div>
+</div>
+<!-- ═══════════════════════════════════════════════════════════════
                  RESULTS SCREEN
             ═══════════════════════════════════════════════════════════════ -->
-            <div id="results-screen" class="screen results-screen">
-                <h1 class="results-title title-geo">🎯 Tes résultats</h1>
-                
-                <div class="score-circle">
-                    <svg width="160" height="160">
-                        <defs>
-                            <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" style="stop-color:#127676"/>
-                                <stop offset="50%" style="stop-color:#E4632E"/>
-                                <stop offset="100%" style="stop-color:#E3A535"/>
-                            </linearGradient>
-                        </defs>
-                        <circle class="score-circle-bg" cx="80" cy="80" r="70"/>
-                        <circle class="score-circle-fill" id="score-circle-fill" cx="80" cy="80" r="70"/>
-                    </svg>
-                    <div>
-                        <span class="score-value" id="final-score">0</span>
-                        <span class="score-label">points</span>
-                    </div>
-                </div>
-
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-value" id="correct-count">0</div>
-                        <div class="stat-label">Bonnes réponses</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value" id="accuracy">0%</div>
-                        <div class="stat-label">Précision</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value" id="rank">-</div>
-                        <div class="stat-label">Niveau</div>
-                    </div>
-                </div>
-
-                <div class="profile-card">
-                    <div class="profile-header">
-                        <div class="profile-badge" id="profile-badge">🌱</div>
-                        <h2 class="profile-title" id="profile-title">Ton profil</h2>
-                    </div>
-                    <p class="profile-description" id="profile-description">Description du profil...</p>
-                    
-                    <div class="tips-section">
-                        <h3 class="tips-title">💡 Pour réduire ton impact</h3>
-                        <ul class="tips-list" id="tips-list">
-                            <!-- Tips dynamiques -->
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="action-buttons">
-                    <button class="retro-btn-pill" onclick="restartQuiz()">
-                        <span class="retro-btn-pill-text">Rejouer</span>
-                        <span class="retro-btn-pill-icon">↻</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    <div class="ab-attribution" style="text-align:center;margin-top:2rem;padding-top:1rem;border-top:1px solid rgba(128,128,128,0.25);font-size:0.8rem;opacity:0.65;">
-  <a href="https://www.linkedin.com/in/antonin-bareau/" target="_blank" rel="noopener" style="font-weight:bold;color:inherit;text-decoration:none;">Antonin Bareau</a>
-  &nbsp;&mdash;&nbsp;
-  <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">Licence CC BY-SA 4.0</a>
+<div class="screen results-screen" id="results-screen">
+<h1 class="results-title title-geo">🎯 Tes résultats</h1>
+<div class="score-circle">
+<svg height="160" width="160">
+<defs>
+<lineargradient id="scoreGradient" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" style="stop-color:#127676"></stop>
+<stop offset="50%" style="stop-color:#E4632E"></stop>
+<stop offset="100%" style="stop-color:#E3A535"></stop>
+</lineargradient>
+</defs>
+<circle class="score-circle-bg" cx="80" cy="80" r="70"></circle>
+<circle class="score-circle-fill" cx="80" cy="80" id="score-circle-fill" r="70"></circle>
+</svg>
+<div>
+<span class="score-value" id="final-score">0</span>
+<span class="score-label">points</span>
 </div>
 </div>
-
-    <script>
+<div class="stats-grid">
+<div class="stat-item">
+<div class="stat-value" id="correct-count">0</div>
+<div class="stat-label">Bonnes réponses</div>
+</div>
+<div class="stat-item">
+<div class="stat-value" id="accuracy">0%</div>
+<div class="stat-label">Précision</div>
+</div>
+<div class="stat-item">
+<div class="stat-value" id="rank">-</div>
+<div class="stat-label">Niveau</div>
+</div>
+</div>
+<div class="profile-card">
+<div class="profile-header">
+<div class="profile-badge" id="profile-badge">🌱</div>
+<h2 class="profile-title" id="profile-title">Ton profil</h2>
+</div>
+<p class="profile-description" id="profile-description">Description du profil...</p>
+<div class="tips-section">
+<h3 class="tips-title">💡 Pour réduire ton impact</h3>
+<ul class="tips-list" id="tips-list">
+<!-- Tips dynamiques -->
+</ul>
+</div>
+</div>
+<div class="action-buttons">
+<button class="retro-btn-pill" onclick="restartQuiz()">
+<span class="retro-btn-pill-text">Rejouer</span>
+<span class="retro-btn-pill-icon">↻</span>
+</button>
+</div>
+</div>
+</div>
+<div class="ab-attribution" style="text-align:center;margin-top:2rem;padding-top:1rem;border-top:1px solid rgba(128,128,128,0.25);font-size:0.8rem;opacity:0.65;">
+<a href="https://www.linkedin.com/in/antonin-bareau/" rel="noopener" style="font-weight:bold;color:inherit;text-decoration:none;" target="_blank">Antonin Bareau</a>
+   — 
+  <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener" style="color:inherit;text-decoration:none;" target="_blank">Licence CC BY-SA 4.0</a>
+</div></div>
+<script>
         // ═══════════════════════════════════════════════════════════════
         // QUESTIONS (15 questions avec équivalents parlants)
         // ═══════════════════════════════════════════════════════════════
@@ -1343,6 +1325,5 @@
             }
         }
     </script>
-
 </body>
 </html>
